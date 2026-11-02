@@ -38,16 +38,27 @@ print(f"총 {len(quizzes)}문제입니다.")
 for i, quiz in enumerate(quizzes, start=1):
     print()
     print(f"[문제 {i}]")
-
     quiz.show_question()
 
+    # 여기부터 입력 처리 코드
     while True:
+        user_input = input("정답 입력: ").strip()
+
+        if not user_input:
+            print("답을 입력해주세요.")
+            continue
+
         try:
-            user_answer = int(input("정답 입력: "))
-            break
+            user_answer = int(user_input)
         except ValueError:
             print("숫자를 입력해주세요.")
-        continue
+            continue
+
+        if 1 <= user_answer <= len(quiz.choices):
+            break
+        else:
+            print(f"1부터 {len(quiz.choices)}까지의 숫자를 입력해주세요.")
+    # 여기까지 입력 처리 코드
 
     if quiz.check_answer(user_answer):
         print("정답입니다!")
