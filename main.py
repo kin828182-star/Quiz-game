@@ -41,7 +41,13 @@ for i, quiz in enumerate(quizzes, start=1):
 
     quiz.show_question()
 
-    user_answer = int(input("정답 입력: "))
+    while True:
+        try:
+            user_answer = int(input("정답 입력: "))
+            break
+        except ValueError:
+            print("숫자를 입력해주세요.")
+        continue
 
     if quiz.check_answer(user_answer):
         print("정답입니다!")
