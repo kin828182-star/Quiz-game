@@ -1,7 +1,6 @@
 
 from quiz import Quiz
 
-# 기본 스포츠 퀴즈 데이터
 quizzes = [
     Quiz(
         "FIFA 월드컵을 처음 개최한 나라는?",
@@ -30,7 +29,26 @@ quizzes = [
     )
 ]
 
-# 퀴즈 목록 출력
-for quiz in quizzes:
-    quiz.show_question()
+# 퀴즈 진행
+score = 0
+
+print("스포츠 퀴즈 게임을 시작합니다!")
+print(f"총 {len(quizzes)}문제입니다.")
+
+for i, quiz in enumerate(quizzes, start=1):
     print()
+    print(f"[문제 {i}]")
+
+    quiz.show_question()
+
+    user_answer = int(input("정답 입력: "))
+
+    if quiz.check_answer(user_answer):
+        print("정답입니다!")
+        score += 1
+    else:
+        print("오답입니다!")
+
+print()
+print(f"최종 결과: {len(quizzes)}문제 중 {score}문제 정답!")
+print(f"점수: {score / len(quizzes) * 100:.0f}점")
